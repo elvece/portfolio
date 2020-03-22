@@ -1,4 +1,4 @@
-import { Component, AfterViewChecked } from '@angular/core'
+import { Component, AfterViewChecked, OnInit } from '@angular/core'
 
 export interface Tile {
     id: number
@@ -31,20 +31,19 @@ export class GridListDynamicComponent implements AfterViewChecked {
   }
 
   onResize(event) {
-      console.log(event)
     this.resizeAllGridItems()
   }
 
   resizeGridItem(item) {
-    const grid = document.getElementsByClassName('flex-container')[0]
+    const grid = document.getElementsByClassName('masonry')[0]
     const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'), 10)
     const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'), 10)
-    const rowSpan = Math.ceil((item.querySelector('.card').getBoundingClientRect().height + rowGap) / (rowHeight + rowGap))
+    const rowSpan = Math.ceil((item.querySelector('.masonry-content').getBoundingClientRect().height + rowGap) / (rowHeight + rowGap))
     item.style.gridRowEnd = 'span ' + rowSpan
   }
 
   resizeAllGridItems() {
-    const allItems = document.getElementsByClassName('flex-item')
+    const allItems = document.getElementsByClassName('masonry-brick')
     for (let x = 0; x < allItems.length; x++) {
       this.resizeGridItem(allItems[x])
     }

@@ -1,43 +1,14 @@
-<!-- <mat-grid-list cols="3" rowHeight="4:6">
-    <mat-grid-tile
-        *ngFor="let tile of tiles"
-        [style.background]="tile.color">
-      {{tile.text}}
-      <img src={{tile.src}}>
-    </mat-grid-tile>
-</mat-grid-list> -->
 
-<!-- <nav class="navbar fixed-top navbar-dark" *ngIf="this._contentService.getContent(this.id)" [style.background-color]="this._contentService.getColor(this.id)">
-    <a (click)="this._location.back()" style="cursor: pointer">
-      <span class="navbar-brand mb-0 h1">
-        <i class="fa fa-chevron-left" aria-hidden="true" style="color: white; padding-right: 10px;"></i>
-        {{ this._contentService.getTitle(this.id) }}
-      </span>
-    </a>
-    <span class="navbar-text" style="color: #fff">
-      {{ this._configurationService.getStrings().last_updated }} {{ this._contentService.getTime(this.id) }}
-      <i class="fa fa-refresh" style="color: #fff; padding-left: 5px;" aria-hidden="true" (click)="this._contentService.reload(this.id)"></i>
-    </span>
-  </nav> -->
-  <main role="main" class="" (window:resize)="onResize($event)" *ngIf="tiles">
-    <div class="flex-container">
-      <div class="flex-item" *ngFor="let element of tiles">
-        <a link="" style="text-decoration: none;">
-          <div [attr.id]="'element' + element.id" class="card box">
-            <img class="card-img-top photothumb" *ngIf="element.src != ''" src="{{ element.src }}" alt="{{ element.id }}" style="background-color: #fff">
-            <div class="card-body">
-              <h5 class="card-title">
-                {{ element.text }}
-              </h5>
-              <p class="card-text" [innerHTML]="element.description"></p>
+  <main role="main" class="" (window:resize)="onResize($event)" (window:load)="onResize($event)" *ngIf="tiles">
+    <div class="masonry">
+        <div class="masonry-brick" *ngFor="let element of tiles">
+            <div class="masonry-content">
+              <a link="" style="text-decoration: none;">
+                <div [attr.id]="'element' + element.id" class="card box">
+                  <img class="card-img-top photothumb" *ngIf="element.src != ''" src="{{ element.src }}" alt="{{ element.id }}">
+                </div>
+              </a>
             </div>
-            <div class="card-footer">
-              <small class="text-muted">
-                {{ element.id }}
-              </small>
-            </div>
-          </div>
-        </a>
-      </div>
+        </div>
     </div>
   </main>
